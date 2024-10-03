@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law Firm - Book an Appointment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    
+    body {
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    label {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #333;
+    }
+    
+    input, select {
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+    
+    button {
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #218838;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    #confirmation {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <h1>Book an Appointment</h1>
+        <form id="appointmentForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="caseType">Select Your Case Type:</label>
+            <select id="caseType" name="caseType" required>
+                <option value="">--Please choose an option--</option>
+                <option value="criminal">Criminal Law</option>
+                <option value="family">Family Law</option>
+                <option value="business">Business Law</option>
+                <option value="immigration">Immigration Law</option>
+                <option value="personalInjury">Personal Injury</option>
+            </select>
+
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <button type="submit">Book Appointment</button>
+        </form>
+
+        <div id="confirmation" class="hidden">
+            <h2>Appointment Confirmed</h2>
+            <p>Thank you, <span id="clientName"></span>. Your appointment for <span id="caseTypeDisplay"></span> has been booked for <span id="appointmentDate"></span> at <span id="appointmentTime"></span>.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const name = document.getElementById('name').value;
+            const caseType = document.getElementById('caseType').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+        
+            document.getElementById('clientName').textContent = name;
+            document.getElementById('caseTypeDisplay').textContent = document.getElementById('caseType').options[document.getElementById('caseType').selectedIndex].text;
+            document.getElementById('appointmentDate').textContent = date;
+            document.getElementById('appointmentTime').textContent = time;
+        
+            document.getElementById('appointmentForm').classList.add('hidden');
+            document.getElementById('confirmation').classList.remove('hidden');
+        });
+        
+    </script>
+</body>
+</html>
